@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="horizontal"
+    android:paddingRight="10dp"
+    >
+
+    <ImageView
+        android:id="@+id/image_set"
+        android:layout_width="283.3dp"
+        android:layout_height="69.3dp"
+        android:src="@mipmap/bottom_logo" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:paddingRight="20dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right|center_vertical"
+            android:text="新论票务"
+            android:textColor="@color/txt_color_333333"
+            android:textSize="13.3dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right|center_vertical"
+            android:layout_marginTop="5dp"
+            android:text=" 关注公众号 轻松兑奖"
+            android:textColor="@color/txt_color_333333"
+            android:textSize="13.3dp" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

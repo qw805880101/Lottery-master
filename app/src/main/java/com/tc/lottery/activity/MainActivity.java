@@ -28,8 +28,6 @@ import com.tc.lottery.util.MotorSlaveUtils;
 import com.tc.lottery.util.Utils;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
-
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -41,8 +39,6 @@ import okhttp3.RequestBody;
 import rx.Observable;
 import rx.functions.Action1;
 import util.UpdateAppUtils;
-
-import static com.tc.lottery.util.MotorSlaveUtils.QUERY_STATUS;
 
 public class MainActivity extends BaseActivity {
     @BindView(R.id.banner)

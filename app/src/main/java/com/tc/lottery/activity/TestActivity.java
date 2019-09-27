@@ -24,7 +24,6 @@ import Motor.MotorSlaveS32;
 
 import static com.tc.lottery.util.MotorSlaveUtils.OUT_TICKET;
 import static com.tc.lottery.util.MotorSlaveUtils.QUERY_FAULT;
-import static com.tc.lottery.util.MotorSlaveUtils.QUERY_STATUS;
 
 public class TestActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -165,19 +164,6 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
             }
 
             /**
-             * 查询状态命令返回
-             */
-            if (QUERY_STATUS.equals(bundle.getString("type"))) {
-                if (bundle.getBoolean("2")) {
-                    /* 掉票处无票， 执行出票命令 */
-                    onTransOne(mIDCur);
-                } else {
-                    /* 掉票处有票，执行设备状态检查命令 */
-                    queryStatus(mIDCur);
-                }
-            }
-
-            /**
              * 查询故障命令返回
              */
             if (QUERY_FAULT.equals(bundle.getString("type"))) {
@@ -222,7 +208,6 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
                 for (Map.Entry<Integer, Boolean> e : status.entrySet()) {
                     bundle.putBoolean("" + e.getKey(), e.getValue());
                 }
-                sendMsg(bundle, QUERY_STATUS);
             } catch (Exception exp) {
 
             }

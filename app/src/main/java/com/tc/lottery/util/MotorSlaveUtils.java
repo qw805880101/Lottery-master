@@ -14,7 +14,7 @@ import Motor.MotorSlaveS32;
 
 public class MotorSlaveUtils {
 
-    public final static String QUERY_STATUS = "queryStatus"; //查询出票机头状态
+//    public final static String QUERY_STATUS = "queryStatus"; //查询出票机头状态
     public final static String OUT_TICKET = "outTicket"; //出票状态
     public final static String QUERY_FAULT = "queryFault"; //查询设备故障
 
@@ -62,29 +62,29 @@ public class MotorSlaveUtils {
     /**
      * 查询机头状态
      */
-    public Runnable ReadStatusRunnable = new Runnable() {
-        @Override
-        public void run() {
-            mBusy = true;
-            try {
-                StringBuilder s1 = new StringBuilder();
-                StringBuilder s2 = new StringBuilder();
-                LogUtil.d("mTicketLen ----" + mTicketLen);
-                HashMap<Integer, Boolean> status = mMotorSlave.ReadStatus(mIDCur, s1, s2);
-                LogUtil.d("发送 ----" + s1.toString());
-                LogUtil.d("接收 " + s2.toString());
-
-                Bundle bundle = new Bundle();
-                for (Map.Entry<Integer, Boolean> e : status.entrySet()) {
-                    LogUtil.d("" + e.getKey() + ":" + e.getValue());
-                    bundle.putBoolean("" + e.getKey(), e.getValue());
-                }
-                sendMsg(bundle, QUERY_STATUS);
-            } catch (Exception exp) {
-
-            }
-        }
-    };
+//    public Runnable ReadStatusRunnable = new Runnable() {
+//        @Override
+//        public void run() {
+//            mBusy = true;
+//            try {
+//                StringBuilder s1 = new StringBuilder();
+//                StringBuilder s2 = new StringBuilder();
+//                LogUtil.d("mTicketLen ----" + mTicketLen);
+//                HashMap<Integer, Boolean> status = mMotorSlave.ReadStatus(mIDCur, s1, s2);
+//                LogUtil.d("发送 ----" + s1.toString());
+//                LogUtil.d("接收 " + s2.toString());
+//
+//                Bundle bundle = new Bundle();
+//                for (Map.Entry<Integer, Boolean> e : status.entrySet()) {
+//                    LogUtil.d("" + e.getKey() + ":" + e.getValue());
+//                    bundle.putBoolean("" + e.getKey(), e.getValue());
+//                }
+//                sendMsg(bundle, QUERY_STATUS);
+//            } catch (Exception exp) {
+//
+//            }
+//        }
+//    };
 
     /**
      * 查询设备故障

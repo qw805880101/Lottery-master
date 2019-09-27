@@ -44,7 +44,6 @@ import okhttp3.RequestBody;
 import rx.Observable;
 import rx.functions.Action1;
 
-import static com.tc.lottery.util.MotorSlaveUtils.QUERY_STATUS;
 
 public class Buy_2Activity extends BaseActivity {
     /**
@@ -180,17 +179,6 @@ public class Buy_2Activity extends BaseActivity {
             /**
              * 查询状态命令返回
              */
-            if (QUERY_STATUS.equals(bundle.getString("type"))) {
-                terminalUpdate("00");
-//                if (bundle.getBoolean("0") && bundle.getBoolean("1") && bundle.getBoolean("2")) {
-//                    /* 掉票处无票， 执行出票命令 */
-//                    terminalUpdate("00");
-//                } else {
-//                    stopProgressDialog();
-//                    /* 掉票处有票，执行设备状态检查命令 */
-//                    ToastUtils.showToast(MainActivity.this, "掉票处有票, 请先取下已出票");
-//                }
-            }
 
         }
     };
@@ -372,7 +360,6 @@ public class Buy_2Activity extends BaseActivity {
             return;
         startProgressDialog(this);
         motorSlaveUtils.setmIDCur(nID);
-        new Thread(motorSlaveUtils.ReadStatusRunnable).start();
     }
 
     /**
@@ -545,7 +532,7 @@ public class Buy_2Activity extends BaseActivity {
             public void call(OrderInfo orderInfo) {
                 stopProgressDialog();
                 orderHandler.removeCallbacks(queryRunnable);
-                if (orderInfo.getRespCode().equals("00")) {
+                if (!orderInfo.getRespCode().equals("00")) {
                     if (!"".equals(orderInfo.getQrCode())) { //下单成功
                         bitCode = QRCodeUtil.createQRCodeBitmap(orderInfo.getQrCode(), 300, 300);
                         closeBt(payType);
@@ -571,8 +558,8 @@ public class Buy_2Activity extends BaseActivity {
             @Override
             public void call(OrderInfo orderInfo) {
 //                stopProgressDialog();
-                if (orderInfo.getRespCode().equals("00")) {
-                    if ("1".equals(orderInfo.getOrderStatus())) { //交易成功关闭订单查询
+                if (!orderInfo.getRespCode().equals("00")) {
+                    if (!"1".equals(orderInfo.getOrderStatus())) { //交易成功关闭订单查询
                         Intent intent = new Intent(Buy_2Activity.this, PaySuccessActivity.class);
                         intent.putExtra("lotteryNum", lotteryNum);
                         intent.putExtra("outTicket", outTicket());

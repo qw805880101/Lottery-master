@@ -17,7 +17,9 @@ public class MyApplication extends BaseApplication {
 
     //    public static String URL = "https://www.new-orator.com/gateway/";
 //    public static String URL = "https://dev.new-orator.com/gateway/front/";
-    public static String URL = "http://140.207.38.90:18083/cp-pay/mpi/";
+    public static String URL = "http://58.246.136.11:18083/cp-pay/mpi/";
+
+//    public static String URL = "http://140.207.38.90:18083/cp-pay/mpi/";
 //    public static String URL = "https://www.new-orator.com/gateway/front/";
 //    public static String URL = "http://140.207.38.90:18083/sign-query-queue/queryNotify.do";
 

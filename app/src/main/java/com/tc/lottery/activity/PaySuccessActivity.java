@@ -42,7 +42,6 @@ import rx.functions.Action1;
 
 import static com.tc.lottery.util.MotorSlaveUtils.OUT_TICKET;
 import static com.tc.lottery.util.MotorSlaveUtils.QUERY_FAULT;
-import static com.tc.lottery.util.MotorSlaveUtils.QUERY_STATUS;
 
 public class PaySuccessActivity extends BaseActivity {
 
@@ -67,7 +66,7 @@ public class PaySuccessActivity extends BaseActivity {
 
     private MotorSlaveUtils motorSlaveUtils; //机头工具类
 
-    private int lotteryNum = 2; //彩票数量
+    private int lotteryNum = 1; //彩票数量
     private int outTicketNum = 1; //已出数量
 
     private TranslateAnimation anim; //彩票动画
@@ -330,7 +329,7 @@ public class PaySuccessActivity extends BaseActivity {
             return;
         updateOutTicketStatus("1");
         motorSlaveUtils.setmIDCur(nID);
-        new Thread(motorSlaveUtils.ReadStatusRunnable).start();
+//        new Thread(motorSlaveUtils.ReadStatusRunnable).start();
     }
 
     /**
@@ -346,7 +345,8 @@ public class PaySuccessActivity extends BaseActivity {
         List<TerminalLotteryInfo> lotteryInfos = new ArrayList<>();
         lotteryInfos.add(terminalLotteryInfo);
 
-        sendMap.put("merOrderId", mUpdateOutTicketStatusInfo.getMerOrderId());
+        sendMap.put("merOrderId", "20190715001746012000.0");
+//        sendMap.put("merOrderId", mUpdateOutTicketStatusInfo.getMerOrderId());
         sendMap.put("terminalLotteryDtos", lotteryInfos);
         RequestBody requestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), Utils.getSendMsg(sendMap));
         Observable<InitInfo> register = mApi.newOutTicket(requestBody).compose(RxUtil.<InitInfo>rxSchedulerHelper());
@@ -410,18 +410,18 @@ public class PaySuccessActivity extends BaseActivity {
                 }
             }
 
-            /**
-             * 查询状态命令返回
-             */
-            if (QUERY_STATUS.equals(bundle.getString("type"))) {
-                if (bundle.getBoolean("2")) {
-                    /* 掉票处无票， 执行出票命令 */
-                    onTransOne(motorSlaveUtils.mIDCur);
-                } else {
-                    /* 掉票处有票，执行设备状态检查命令 */
-                    queryStatus(motorSlaveUtils.mIDCur);
-                }
-            }
+//            /**
+//             * 查询状态命令返回
+//             */
+//            if (QUERY_STATUS.equals(bundle.getString("type"))) {
+//                if (bundle.getBoolean("2")) {
+//                    /* 掉票处无票， 执行出票命令 */
+//                    onTransOne(motorSlaveUtils.mIDCur);
+//                } else {
+//                    /* 掉票处有票，执行设备状态检查命令 */
+//                    queryStatus(motorSlaveUtils.mIDCur);
+//                }
+//            }
 
             /**
              * 查询故障命令返回
